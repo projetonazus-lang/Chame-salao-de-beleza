@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heart, Star, Sparkles, MapPin, Clock } from 'lucide-react';
+import { Heart, Star, Sparkles, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { SALON_INFO } from '../data/salonData';
 
 interface AboutSectionProps {
@@ -8,14 +9,20 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => {
   return (
-    <section id="sobre" className="py-16 lg:py-24 bg-[#F5EEE8]/60 relative">
+    <section id="sobre" className="py-16 lg:py-24 bg-[#F5EEE8]/60 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Story Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Visual Composition with Multiple Angles */}
-          <div className="lg:col-span-6 relative">
+          {/* Left Column: Visual Composition with Framer Motion slide-in */}
+          <motion.div
+            initial={{ opacity: 0, x: -35 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 relative"
+          >
             <div className="relative mx-auto max-w-[480px]">
               
               {/* Main Photo: Salon Atmosphere & Care */}
@@ -28,7 +35,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
               </div>
 
               {/* Inset Photo: Hair Care Detail */}
-              <div className="absolute -bottom-8 -right-6 w-48 sm:w-56 aspect-square rounded-[24px] overflow-hidden shadow-2xl border-4 border-white hidden sm:block">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="absolute -bottom-8 -right-6 w-48 sm:w-56 aspect-square rounded-[24px] overflow-hidden shadow-2xl border-4 border-white hidden sm:block"
+              >
                 <img
                   src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80"
                   alt="Tratamento capilar com resultado impecável"
@@ -38,10 +51,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                     (e.target as HTMLImageElement).src = '/assets/aistudio/image_51777c26.png';
                   }}
                 />
-              </div>
+              </motion.div>
 
               {/* Floating Badge: 5.0 Google Score */}
-              <div className="absolute -top-6 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md px-5 py-4 rounded-2xl border border-[#EBE4DD] shadow-xl">
+              <motion.div
+                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.3 }}
+                className="absolute -top-6 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md px-5 py-4 rounded-2xl border border-[#EBE4DD] shadow-xl"
+              >
                 <div className="flex items-center gap-1 text-[#D05E33]">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" />
@@ -53,13 +72,19 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                 <span className="block text-xs text-[#7A6E67] font-medium">
                   95 avaliações no Google
                 </span>
-              </div>
+              </motion.div>
 
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Narrative & Values */}
-          <div className="lg:col-span-6">
+          {/* Right Column: Narrative & Values with Framer Motion slide-in */}
+          <motion.div
+            initial={{ opacity: 0, x: 35 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6"
+          >
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#D05E33] block mb-2">
               Conheça Nossa História
             </span>
@@ -78,9 +103,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
               Reconhecido pela nota máxima de <strong>5,0 estrelas no Google com 95 avaliações</strong>, nosso salão se destaca pelo <strong>atendimento atencioso</strong> e pela dedicação aos resultados de cada cliente — do corte à finalização, das mechas aos tratamentos e manicure.
             </p>
 
-            {/* Feature Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-start gap-3 p-4 rounded-2xl bg-white/80 border border-[#EBE4DD]">
+            {/* Feature Highlights with soft reveal */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+            >
+              <div className="flex items-start gap-3 p-4 rounded-2xl bg-white/80 border border-[#EBE4DD] transition-all hover:shadow-md">
                 <Heart className="w-5 h-5 text-[#D05E33] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-[#1C1815] uppercase tracking-wider">
@@ -92,7 +123,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-4 rounded-2xl bg-white/80 border border-[#EBE4DD]">
+              <div className="flex items-start gap-3 p-4 rounded-2xl bg-white/80 border border-[#EBE4DD] transition-all hover:shadow-md">
                 <Sparkles className="w-5 h-5 text-[#D05E33] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-[#1C1815] uppercase tracking-wider">
@@ -103,7 +134,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             <div className="flex items-center gap-4">
               <button
@@ -123,7 +154,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                 Ver Localização
               </a>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
